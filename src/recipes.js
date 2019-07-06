@@ -31,8 +31,9 @@ const createRecipe = () => {
     recipes.push({
       id: recipeId,
       title: '',
+      msg: '',
       body: '',
-      ingredients: []
+      ingredients: [],
     })
 
     //save the data
@@ -72,6 +73,42 @@ const updateRecipe = (id, updates) => {
   saveRecipe()
 }
 
+const updateRecipeStatus = (id) => {
+  const recipe = getRecipeById(id);
+  let availCount = 0;
+
+  const totalIngredients = recipe.ingredients.length;
+
+  recipe.ingredients.forEach((ingredient) => {
+    if(ingredient.available === true) {
+      availCount++
+    }
+  })
+
+  let msg = '';
+  if(totalIngredients === 0) {
+    msg = "Please add ingredients"
+  } else if(availCount === 0) {
+    msg = `No ingredients available (${availCount} / ${totalIngredients})`
+  } else if(totalIngredients > availCount) {
+    msg = `Some ingredients available (${availCount} / ${totalIngredients})`
+  } else {
+    msg = `All ingredients available! (${availCount} / ${totalIngredients})`
+  }
+  recipe.msg = msg
+  saveRecipe()
+  return msg
+}
+
 loadRecipes()
 
-export { getRecipe, createRecipe, loadRecipes, deleteRecipe, updateRecipe, getRecipeById, saveRecipe }
+export { 
+  getRecipe, 
+  createRecipe, 
+  loadRecipes, 
+  deleteRecipe, 
+  updateRecipe, 
+  getRecipeById, 
+  saveRecipe, 
+  updateRecipeStatus 
+}

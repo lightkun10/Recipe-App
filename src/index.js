@@ -21,11 +21,12 @@ document.querySelector('#search-recipe').addEventListener('input', (e) => {
   renderRecipes()
 });
 
-// window.addEventListener('storage', (e) => {
-//   if(e.key === 'recipes') {
-//     renderRecipes()
-//   }
-// })
+window.addEventListener('storage', (e) => {
+  if(e.key === 'recipes') {
+    renderRecipes()
+  }
+  console.log(e.key)
+})
 
 deleteRecipe('c2214b8f-1d2f-42d3-919b-e1c65c0f7c48')
 console.log(getRecipe())

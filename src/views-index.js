@@ -21,17 +21,10 @@ const renderRecipes = () => {
   let recipesEl = document.querySelector('#recipes')
   //debugger
 
-  // console.log(getRecipe())
   const filters = getFilters()
   let recipes = getRecipe()
-  //const recipes = getRecipe()
-  // const recipes = getRecipe()
-
-  // const filteredRecipes = getRecipe().filter((recipe) => recipe.title.toLowerCase().includes(filters.searchText.toLowerCase()))
+  
   const filteredRecipes = (filters.searchText.length > 0) ? recipes.filter((recipe) => recipe.title.toLowerCase().includes(filters.searchText.toLowerCase())) : recipes
-  //clear the data before adding new notes
-
-  // const ingredientAvail = getIngredient(recipeId, ingredientId)
 
   recipesEl.innerHTML = '';
 
