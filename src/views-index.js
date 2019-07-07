@@ -2,23 +2,29 @@ import { getFilters, setFilters } from './filters'
 import { getRecipe, loadRecipes } from './recipes';
 import { getIngredient } from './ingredients'
 
+let recipesEl = document.querySelector('#recipes')
+
 // Generate DOM structure
-const generateRecipeDom = (recipe) => {
+const generateRecipeDom = ({title, msg, id}) => {
   const titleEl = document.createElement('a')
   const containerEl = document.createElement('div')
   
   // setup the link
-  titleEl.setAttribute('href', `./edit.html#${recipe.id}`)
-  titleEl.textContent= recipe.title
-  titleEl.appendChild(containerEl)
+  titleEl.setAttribute('href', `./edit.html#${id}`)
+  titleEl.textContent = title
+  titleEl.classList.add('collection-item')
+  // titleEl.appendChild(containerEl)
   // titleEl.classList.add() // ADD CLASS FOR STYLE HERE
+
+  const msgEl = document.createElement('p')
+  msgEl.textContent = msg.length > 0 ? msg : 'Add ingredients'
+  titleEl.appendChild(msgEl)
 
   // return containerEl
   return titleEl
 }
 
 const renderRecipes = () => {
-  let recipesEl = document.querySelector('#recipes')
   //debugger
 
   const filters = getFilters()
@@ -57,11 +63,11 @@ const renderEmptyMsg = () => {
   recipesEl.append(msgEl)
 }
 
-const generateSummaryDom = (ingredientAvail) => {
-  const summaryEl = document.createElement('h3')
-  summaryEl.textContent = ingredientAvail.length
-  return summaryEl
-}
+// const generateSummaryDom = (ingredientAvail) => {
+//   const summaryEl = document.createElement('h3')
+//   summaryEl.textContent = ingredientAvail.length
+//   return summaryEl
+// }
 
 // const renderIngredients = (ingredients) => {
 //   const ingredientsEl = document.querySelector('recipe-ingredient')
@@ -72,4 +78,4 @@ const generateSummaryDom = (ingredientAvail) => {
 //   })
 // }
 
-export { renderRecipes, generateRecipeDom, generateSummaryDom }
+export { renderRecipes, generateRecipeDom }
